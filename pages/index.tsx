@@ -16,7 +16,7 @@ const Home: NextPage = () => {
         todos.add(context.createNewTodoFormInput);
       },
       deleteTodo: async (context, event) => {
-        // throw new Error("Sth");
+        throw new Error("Error while deleting");
         todos.delete(event.todo);
       },
     },
@@ -25,17 +25,26 @@ const Home: NextPage = () => {
     <div className={styles.container}>
       <pre>{JSON.stringify(state.value)}</pre>
       <pre>{JSON.stringify(state.context)}</pre>
-      {state.context.todos.map((todo) => (
-        <div key={todo}>
-          <p>{todo}</p>
-          <button onClick={() => send({ type: "Delete", todo })}>Delete</button>
-        </div>
-      ))}
       <div>
         {state.matches("Todos Loaded") && (
-          <button onClick={() => send({ type: "Create new" })}>
-            Create new
-          </button>
+          <>
+            {state.context.todos.map((todo) => (
+              <div key={todo}>
+                <p>{todo}</p>
+                <button onClick={() => send({ type: "Delete", todo })}>
+                  Delete
+                </button>
+              </div>
+            ))}
+            <button onClick={() => send({ type: "Create new" })}>
+              Create new
+            </button>
+          </>
+        )}
+        {state.matches("Deleting todo errored") && (
+          <>
+            <p>Error: {state.context.errorMessage}</p>
+          </>
         )}
         {state.matches("Creating new todo.Showing form input") && (
           <form
