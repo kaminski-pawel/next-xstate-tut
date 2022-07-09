@@ -1,10 +1,13 @@
 import { useMachine } from "@xstate/react";
 import type { NextPage } from "next";
 import { todosMachine } from "../machines/todoAppMachine";
-// import { myMachine } from "../machines/myFistMachine";
 import styles from "../styles/Home.module.css";
 
-const todos = new Set<string>(["Do thing 1", "Do thing 2"]);
+const todos = new Set<string>([]);
+
+const randomBoolean = (): boolean => {
+  return Math.floor(Math.random() * 2) == 0;
+};
 
 const Home: NextPage = () => {
   const [state, send] = useMachine(todosMachine, {
@@ -16,7 +19,9 @@ const Home: NextPage = () => {
         todos.add(context.createNewTodoFormInput);
       },
       deleteTodo: async (context, event) => {
-        throw new Error("Error while deleting");
+        if (randomBoolean()) {
+          throw new Error("Error while deleting");
+        }
         todos.delete(event.todo);
       },
     },
