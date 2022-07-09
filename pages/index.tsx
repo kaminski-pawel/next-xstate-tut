@@ -14,21 +14,8 @@ const Home: NextPage = () => {
   });
   return (
     <div className={styles.container}>
-      {JSON.stringify(state.value)}
-      <button
-        onClick={() => {
-          send({ type: "Todos loaded", todos: ["Do sth"] });
-        }}
-      >
-        Todos loaded
-      </button>
-      <button
-        onClick={() => {
-          send({ type: "Loading todos failed", errorMessage: "Error" });
-        }}
-      >
-        Loading todos failed
-      </button>
+      <pre>{JSON.stringify(state.value)}</pre>
+      <pre>{JSON.stringify(state.context)}</pre>
     </div>
   );
 };
