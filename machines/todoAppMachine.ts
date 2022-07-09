@@ -1,7 +1,7 @@
 import { assign, createMachine } from "xstate";
 
 export const todosMachine =
-  /** @xstate-layout N4IgpgJg5mDOIC5QBUD2FWwAQFkCGAxgBYCWAdmAHQAyqeE5UWaGsAxBhZeQG6oDWVFplyFSXWvUbN0mBL1QE8AFxKoyAbQAMAXUSgADphKr1+kAA9EAVgDslAEzWAnHYCMAZgAsXtw60AbG4ANCAAnogAtB4OHpRa1l7+Wp7OtgkOAL6ZocLY+MTkVJIMZEx5bGAATlWoVZQGADYqAGZ1ALaUeaKFEnSl5bKw8mR8SqaauuZGsCZqZOZWCJEOttaUAbZuWqteMQ5eAQAcoRHLbr6U22leR0m2voEB2blDPeJCbyWQbADCVWAVGAsBQAO7TYwTRaIZwBSjOI7bY5aI7+Y7WDynKLbLRXDweI5bWxpTwBGIvEDdAofSj-QGqMogsCgrDKWSUADKRFQoOkbSq7Sw5AMAFdlGwAGIdIVkUXKLDEPBlSAQ2ZQpCWKIOI5xA5eaxuVGxaxHI6bLEIJxwi4BHzE1ywlwUqliIq0gEqaRg1nsrk8vnS4VitgckUAI3aJlVczMGqWKwclC8OwOtlNBq8aZNFrctjizgczg8CO2-mc92db2pbrpnsZ3rZGE5eB40kbqEqNTqDWayn5nRdvSotYZTAbvpbbdkIzGnvU2j0GpmMYWcaiiSTa08th3ARRAQcAQtHh2jiShp1zivsOc2RyIDI6Dg5kHNJK0jy0fVoHjDiclBiNxnECTxViAjELWiLQvEoawD2AwIUj2QlK1Yd43W6b4IC-eZoQQNw3CTaDbH8Jw-GsFJbCPcJsXLeJkwCFwkhTQ1nnvV83XfRlumqWoASqbCl0hXC12WbV1kNBEdQuXwSMxGixKOWCLlNfxDgxQk2NeNDqy4EcvWZH0mz9XlGX7GU5Rw2Mfy1EiALg6xHOJdI83ks5PBgrR0kCI5rG1BEMVQkRdOHD1RyZFl22bVtGXbKzVxshBYXhAi91NDwLlWHUc0uAtyxxKTYRRIL8ldPSwoMyLZHivCoPsPUDSNDwTTNWwLSCeJvLzJJDnxAItMpKsyrAGrROiDKz31Q0-2a01zQU6JkoSXxXD1BJjjvTIgA */
+  /** @xstate-layout N4IgpgJg5mDOIC5QBUD2FWwAQFkCGAxgBYCWAdmAHQAyqeE5UWaGsAxBhZeQG6oDWVFplyFSXWvUbN0mBL1QE8AFxKoyAbQAMAXUSgADphKr1+kAA9EAJgCMANkoBWJwE4A7ABZXr+wGYne3cADgAaEABPRABaPx9KLTstJwd3J083TwBfLPDhbHxicipJBjImfLYwACdq1GrKAwAbFQAzeoBbSnzRIok6MorZWHkyPiVTTV1zI1gTNTJzKwRo2wdKP3ctYM9g4Ntrdx8nMMiYu3cE93s3H38HXaccvOHe8SFX0sg2ABEwJrAyjAM2MkyWMQcTkongO7msnhCTnh13s4SiK2s-mcWjSyVs7j8nkJ2VyIB6hXe3U+A2+AGFqmAVGAsBQAO4guZgpCWGyBSjWfbwoJaWwpJzuNEQ66UWxaHHWPyKgWuZLPMmvCnFSj0xmqcossCsrDKWSUADKRFQrOk7WqHSw5AMAFdlGwAGKdB1kZ3KLDEPDlSAc+ZmbnLVYKyiuTxEuL2LQwxOndG2YJaGVHNz2Tzxuz4tXksRanUqaRs42mi1Wm2ex0uthmp0AIw6JmDXNAy1sfkcwQ8rj8OMJ1h8hMlCA8Ufs1nSN3s-k8cuCBY1Ra4Jb1THLJow5rwPGkO9QHHUVAUgiprDexYZpf128r+8PslG41L6m0em5sxDizDiCcLRXA2FVZUhVxgkyccbinGcTkCPxbBhVwVyvTV11vTcDSNI89wPfUjyqWp6kaFplFtLpCz6KgNzLQ0K13M0nwIl8FAmBZP3bBZwQQWVPEoYIZwTbZY3jaNx2sTF+TSRV7GCbN4UOaxUJEdCqD+AEsMIzgzzGAQPjQtd1P+QFnwwV9FHfKYv0MUFuP-FZCWAwdsyQwC-D2btPHHaJdn4sU4WuHZ7AHZdSSoykNNMliMCIuoGmaNpOkvVSjMoKKtNYvT2I-aZvzs0NOxiQlLjTA5ZUEg49lRM4VnxRxZXlRU-GVVU1TIdA4HMCKtVKaR8i4wqeRWdIEhSawh0ExUDj8Hyc2CaEgiQ3ZM38FDwtXaiUuwL4IEGv8it4rZKC2XYIOCLYQoJZNzmOuU0llVwXA8eMSReQytr6-UehqeKaj2-LOXsw6IyhPYPATJEERnA4fL46F9gJAJBJHEcng2j7KVo+96NwqtrX1CivR9faeNWbsxv8dx3Hxa5MW7ccThlLQWocUcFTWUUVIKNLsa3XHH3wpgj1JhyZ0cPMQi8QCLqcaCoV8ODIPuZDuevDDdTonDZFFkGkMuaNY18BMkKQm66v4vs5KVSCaZFGM1bU9KTMyjBdeG3y4koOSQocEdRR2CVatiNNnBHNI7E2WxXBHR20oyszUCwX76iDQHfzJxc-BOmSWYmp64VsOHbASaOMhCQlNha9w4+o93wxzbOfdcP2W5OBEfJcS4AsHdJZIRHIciAA */
   createMachine(
     {
       context: {
@@ -21,11 +21,15 @@ export const todosMachine =
           saveTodo: {
             data: void;
           };
+          deleteTodo: {
+            data: void;
+          };
         },
         events: {} as
           | { type: "Create new" }
           | { type: "Form input changed"; value: string }
-          | { type: "Submit" },
+          | { type: "Submit" }
+          | { type: "Delete"; todo: string },
       },
       id: "Todos Machine",
       initial: "Loading Todos",
@@ -49,6 +53,9 @@ export const todosMachine =
         },
         "Todos Loaded": {
           on: {
+            Delete: {
+              target: "Deleting todo",
+            },
             "Create new": {
               target: "Creating new todo",
             },
@@ -71,17 +78,38 @@ export const todosMachine =
             "Saving todo": {
               invoke: {
                 src: "saveTodo",
-                onError: [
+                onDone: [
                   {
-                    target: "Showing form input",
-                    actions: "assignErrorToContext",
+                    target: "#Todos Machine.Loading Todos",
                   },
                 ],
-                onDone: [{ target: "#Todos Machine.Loading Todos" }],
+                onError: [
+                  {
+                    actions: "assignErrorToContext",
+                    target: "Showing form input",
+                  },
+                ],
               },
             },
           },
         },
+        "Deleting todo": {
+          invoke: {
+            src: "deleteTodo",
+            onDone: [
+              {
+                target: "Loading Todos",
+              },
+            ],
+            onError: [
+              {
+                actions: "assignErrorToContext",
+                target: "Deleting todo errored",
+              },
+            ],
+          },
+        },
+        "Deleting todo errored": {},
       },
     },
     {
@@ -101,5 +129,3 @@ export const todosMachine =
       },
     }
   );
-// https://www.youtube.com/watch?v=IkLa12f_RRU
-// https://www.youtube.com/watch?v=2eurRx-tR-I

@@ -15,12 +15,22 @@ const Home: NextPage = () => {
       saveTodo: async (context, event) => {
         todos.add(context.createNewTodoFormInput);
       },
+      deleteTodo: async (context, event) => {
+        // throw new Error("Sth");
+        todos.delete(event.todo);
+      },
     },
   });
   return (
     <div className={styles.container}>
       <pre>{JSON.stringify(state.value)}</pre>
       <pre>{JSON.stringify(state.context)}</pre>
+      {state.context.todos.map((todo) => (
+        <div key={todo}>
+          <p>{todo}</p>
+          <button onClick={() => send({ type: "Delete", todo })}>Delete</button>
+        </div>
+      ))}
       <div>
         {state.matches("Todos Loaded") && (
           <button onClick={() => send({ type: "Create new" })}>
